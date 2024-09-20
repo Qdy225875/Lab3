@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise3</title>
+    <script src="randominteger.js"></script>
+</head>
+<body>
+<h1>数字猜谜游戏</h1>
+<p>已生成随机数字。</p>
+<p>你有 10 次机会来猜测这个数字。</p>
+<input type="number" id="input" min="1" max="100" placeholder="输入你的猜测">
+<button id="button">提交猜测</button>
+
+<p id="result"></p>
+<p id="previousGuesses"></p>
+<button id="restartButton" style="display: none;">重新开始游戏</button>
+
+<script>
+    let randomNumber = randomInt();
+    let attempts = 10;
+    let previousGuesses = [];
+
+    function resetting() {
+        randomNumber = randomInt();
+        attempts = 10; 
+        previousGuesses = [];
+        document.getElementById('result').innerText = '';
+        document.getElementById('previousGuesses').innerText = '';
+        document.getElementById('restartButton').style.display = 'none';
+    }
+
+    document.getElementById('button').onclick = function() {
+        let number = Number(document.getElementById('input').value);
+        document.getElementById('input').value='';
+        if (isNaN(number) || number < 1 || number > 100) {
+            document.getElementById('result').innerText = '请输入一个有效的数字（1-100）。';
+            return;
+        }
+        previousGuesses.push(number);
+        attempts--;
+        if (number === randomNumber) {
+            document.getElementById('result').innerText = `恭喜你猜对了数字 ${randomNumber}`;
+            document.getElementById('restartButton').style.display = 'block';
+        } else if (attempts === 0) {
+            document.getElementById('result').innerText = `游戏结束,你没有机会了。正确的数字是 ${randomNumber}。`;
+            document.getElementById('restartButton').style.display = 'block';
+        } else {
+            let num = number < randomNumber ? '太低了！' : '太高了！';
+            document.getElementById('result').innerText = num + ` 你还有 ${attempts} 次机会。`;
+        }
+        document.getElementById('previousGuesses').innerText = `之前的猜测: ${previousGuesses.join(', ')}`;
+    };
+
+    document.getElementById('restartButton').onclick = function() {
+        resetting();
+    };
+    resetting();
+</script>
+
+</body>
+</html>

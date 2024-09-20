@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise2</title>
+</head>
+<body>
+    <h1>Navigator 对象</h1>
+    <h2>浏览器信息</h2>
+    <pre id="navigator-info"></pre>
+    <script>
+        const navigatorInfo = `
+        用户代理: ${navigator.userAgent}
+        浏览器语言: ${navigator.language}
+        在线状态: ${navigator.onLine}
+        平台: ${navigator.platform}
+        视网膜屏幕: ${navigator.maxTouchPoints > 0 ? '支持' : '不支持'}
+        设备记忆: ${navigator.deviceMemory || '不支持'}
+        `;
+        document.getElementById('navigator-info').textContent = navigatorInfo;
+    </script>
+</body>
+</html>

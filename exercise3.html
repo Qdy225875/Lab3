@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercise3</title>
+    <script src="randominteger.js"></script> 
+<body>
+    <h1>调用外部JavaScript</h1>
+    <button type= "button" id = "random" onclick= "generateRandomNumber()"> 生成随机数</button>
+    <p id="result"></p>
+    <script>
+        function generateRandomNumber() {
+            let randomNumber = randomInt();
+            document.getElementById('result').innerText = `随机数结果为：${randomNumber}`;
+        }
+    </script>
+</body>
+</html>
